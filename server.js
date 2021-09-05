@@ -12,21 +12,16 @@ const app = express()
 
 app.use(helmet())
 app.use(morgan("combined"))
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }))
+app.use(cors({ credentials: true, origin: "http://localhost:3000" })) //change for production
 app.use(express.json({ limit: "50mb" }))
 app.use(express.urlencoded({ extended: true, limit: "50mb" }))
 app.use(cookieParser())
 
 app.use("/user", routes.user)
 
-// setup credentials
+// setup credentials for cookies
 app.use((req, res, next) => {
-  //   res.header("Content-Type", "application/json;charset=UTF-8")
   res.header("Access-Control-Allow-Credentials", true)
-  //   res.header(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept"
-  // )
   next()
 })
 

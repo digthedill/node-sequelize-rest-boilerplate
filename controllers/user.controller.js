@@ -36,7 +36,7 @@ exports.getUser = async (req, res) => {
 exports.createUser = async (req, res) => {
   const { username, password, email } = req.body
   if (!username || !password) {
-    return res.status(400).send({
+    res.status(400).json({
       message: "Must include username or password",
     })
   }
@@ -46,8 +46,18 @@ exports.createUser = async (req, res) => {
     },
   })
   if (usernameExists) {
-    return res.status(400).send({
+    res.status(400).json({
       message: `${username} already exists, try a new name`,
+    })
+  }
+  const emailExists = await User.findOne({
+    where: {
+      email,
+    },
+  })
+  if (emailExists) {
+    res.status(400).json({
+      message: `${email} is already registered! `,
     })
   }
 
