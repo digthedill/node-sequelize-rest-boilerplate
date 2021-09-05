@@ -14,14 +14,20 @@ const user = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
       },
+      email: {
+        type: DataTypes.STRING,
+        unique: true,
+      },
     },
     {
+      tableName: "users",
       timestamps: true,
       freezeTableName: true,
     }
-  );
-  User.sync();
-  return User;
-};
+  )
 
-export default user;
+  // User.sync()
+  return User
+}
+
+export default user

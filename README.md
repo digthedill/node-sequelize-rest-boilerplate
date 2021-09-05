@@ -2,6 +2,10 @@
 
 Need to add
 
+- polymorphic associations
+
+  - one to many relation
+
 - auth
   - jwt
   - cookie
